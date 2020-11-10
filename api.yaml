@@ -1,0 +1,351 @@
+openapi: 3.0.0
+info:
+  title: Employees API
+  description: The Employees API provides access to an employees data.
+  contact: { }
+  version: '1.0.0'
+servers:
+  - url: http://api-gw/employees-api/v1
+    variables: { }
+paths:
+  /employees:
+    get:
+      summary: Search employees
+      description: Search for employee records using defined filter criteria.
+      operationId: SearchEmployees
+      parameters:
+        - name: lastName
+          in: query
+          description: Filter by customer's lastname
+          example: 'Bernhardt'
+          schema:
+            type: string
+        - name: employeeNo
+          in: query
+          description: Filter by the unique customer identifier
+          example: 'GID120935'
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          example: 'text/plain'
+          schema:
+            type: string
+        - name: api-key
+          in: header
+          description: ''
+          example: 'asdasdsaasd-asdsa-asdas-asdasd-asdasdad'
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: { }
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+                description: ''
+              example:
+                - employeeNo: GID120935
+                  firstName: Sven
+                  lastName: Bernhardt
+                  jobTitle: Chief Architect
+                  email: svenbernhardt@sttc.com
+                  gender: male
+                  phone: +(49) 2261 6001 0
+        500:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+      deprecated: false
+    post:
+      summary: Create employee
+      description: Create a new employee record.
+      operationId: CreateEmployee
+      parameters:
+        - name: api-key
+          in: header
+          description: ''
+          example: 'asdasdsaasd-asdsa-asdas-asdasd-asdasdad'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+            example:
+              employeeNo: GID120935
+              firstName: Sven
+              lastName: Bernhardt
+              jobTitle: Chief Architect
+              email: svenbernhardt@sttc.com
+              gender: male
+              phone: +(49) 2261 6001 0
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: { }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+              example:
+                employeeNo: GID120935
+                firstName: Sven
+                lastName: Bernhardt
+                jobTitle: Chief Architect
+                email: svenbernhardt@sttc.com
+                gender: male
+                phone: +(49) 2261 6001 0
+        400:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+        500:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+      deprecated: false
+  /employees/{employeeNo}:
+    put:
+      summary: Update customer
+      description: Update an existing employee.
+      operationId: UpdateCustomer
+      parameters:
+        - name: employeeNo
+          in: path
+          description: employeeNo of customer to update or delete
+          required: true
+          example: 'GID120935'
+          schema:
+            type: string
+        - name: api-key
+          in: header
+          description: ''
+          example: 'asdasdsaasd-asdsa-asdas-asdasd-asdasdad'
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+            example:
+              employeeNo: GID120935
+              firstName: Sven
+              lastName: Bernhardt
+              jobTitle: Chief Architect
+              email: svenbernhardt@sttc.com
+              gender: male
+              phone: +(49) 2261 6001 0
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: { }
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+              example:
+                employeeNo: GID120935
+                firstName: Sven
+                lastName: Bernhardt
+                jobTitle: Chief Architect
+                email: svenbernhardt@sttc.com
+                gender: male
+                phone: +(49) 2261 6001 0
+        400:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+        404:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+        500:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+      deprecated: false
+    delete:
+      summary: Delete customer
+      description: 'Delete an existing customer'
+      operationId: DeleteCustomer
+      parameters:
+        - name: employeeNo
+          in: path
+          description: employeeNo of customer to update or delete
+          required: true
+          example: 'GID120935'
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          example: 'text/plain'
+          schema:
+            type: string
+        - name: api-key
+          in: header
+          description: ''
+          required: true
+          example: 'asdasdsaasd-asdsa-asdas-asdasd-asdasdad'
+          schema:
+            type: string
+      responses:
+        204:
+          description: ''
+          headers: { }
+        404:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+        500:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                type: TECHNICAL_FAULT
+                code: TECH-04-0001
+                message: This is a technical fault
+                time: 2019-05-12T20:30:00.000Z
+      deprecated: false
+components:
+  schemas:
+    Employee:
+      title: Employee
+      required:
+        - firstName
+        - lastName
+        - jobTitle
+        - email
+        - address
+      type: object
+      properties:
+        employeeNo:
+          type: string
+          example: 'GID120935'
+        firstName:
+          type: string
+          example: 'Sven'
+        lastName:
+          type: string
+          example: 'Bernhardt'
+        jobTitle:
+          type: string
+          example: 'Chief Architect'
+        email:
+          type: string
+          example: 'svenbernhardt@sttc.com'
+        gender:
+          type: string
+          example: male
+        phone:
+          type: string
+          example: '+(49) 2261 6001 0'
+      example:
+        employeeNo: GID120935
+        firstName: Sven
+        lastName: Bernhardt
+        jobTitle: Chief Architect
+        email: svenbernhardt@sttc.com
+        gender: male
+        phone: +(49) 2261 6001 0
+    Error:
+      title: Error
+      required:
+        - type
+        - code
+        - message
+        - time
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type'
+        code:
+          type: string
+          example: 'TECH-04-0001'
+        message:
+          type: string
+          example: 'This is a technical fault'
+        time:
+          type: string
+          example: '2019-05-12T20:30:00.000Z'
+      example:
+        type: TECHNICAL_FAULT
+        code: TECH-04-0001
+        message: This is a technical fault
+        time: 2019-05-12T20:30:00.000Z
+    type:
+      title: type
+      enum:
+        - TECHNICAL_FAULT
+        - BUSINESS_FAULT
+      type: string
+      example: 'TECHNICAL_FAULT'
+tags: [ ]

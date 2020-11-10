@@ -1,0 +1,39 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: employee-service
+  labels:
+    app: employee-service
+spec:
+  type: NodePort
+  selector:
+    app: employee-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: http
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: employee-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employee-service
+  template:
+    metadata:
+      labels:
+        app: employee-service
+        version: v1
+    spec:
+      containers:
+        - name: employee-service
+          image: fra.ocir.io/frruuyqdswys/employee-service:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: ocirsecret
+---

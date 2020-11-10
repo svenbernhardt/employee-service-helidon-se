@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: employees-ingress
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /employees
+            backend:
+              serviceName: employee-service
+              servicePort: 8080
