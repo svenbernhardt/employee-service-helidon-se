@@ -59,17 +59,6 @@ paths:
                   email: svenbernhardt@sttc.com
                   gender: male
                   phone: +(49) 2261 6001 0
-        500:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
       deprecated: false
     post:
       summary: Create employee
@@ -114,28 +103,6 @@ paths:
                 email: svenbernhardt@sttc.com
                 gender: male
                 phone: +(49) 2261 6001 0
-        400:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
-        500:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
       deprecated: false
   /employees/{employeeNo}:
     put:
@@ -147,9 +114,10 @@ paths:
           in: path
           description: employeeNo of customer to update or delete
           required: true
-          example: 'GID120935'
           schema:
             type: string
+          example:
+            value: 'GID120935'
         - name: api-key
           in: header
           description: ''
@@ -188,39 +156,6 @@ paths:
                 email: svenbernhardt@sttc.com
                 gender: male
                 phone: +(49) 2261 6001 0
-        400:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
-        404:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
-        500:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
       deprecated: false
     delete:
       summary: Delete customer
@@ -252,28 +187,6 @@ paths:
         204:
           description: ''
           headers: { }
-        404:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
-        500:
-          description: Unexpected error in API call. See HTTP response body for details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                type: TECHNICAL_FAULT
-                code: TECH-04-0001
-                message: This is a technical fault
-                time: 2019-05-12T20:30:00.000Z
       deprecated: false
 components:
   schemas:

@@ -1,10 +1,14 @@
 
 package de.sbernhardt.demo.employee;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import de.sbernhardt.demo.employee.model.Employee;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 
@@ -21,14 +25,6 @@ public class MainTest {
 
     private static WebServer webServer;
     private static WebClient webClient;
-    private static final JsonBuilderFactory JSON_BUILDER = Json.createBuilderFactory(Collections.emptyMap());
-    private static final JsonObject TEST_JSON_OBJECT;
-
-    static {
-        TEST_JSON_OBJECT = JSON_BUILDER.createObjectBuilder()
-                .add("greeting", "Hola")
-                .build();
-    }
 
     @BeforeAll
     public static void startTheServer() throws Exception {
@@ -59,16 +55,16 @@ public class MainTest {
         }
     }
 
-    @Test
+
     public void testHelloWorld() throws Exception {
         webClient.get()
-                .path("/greet")
-                .request(JsonObject.class)
-                .thenAccept(jsonObject -> Assertions.assertEquals("Hello World!", jsonObject.getString("message")))
+                .path("/employees")
+                .request(JsonNode.class)
+                .thenAccept(jsonObject -> Assertions.assertEquals("Hello World!", jsonObject.get("message")))
                 .toCompletableFuture()
                 .get();
 
-        webClient.get()
+        /*webClient.get()
                 .path("/greet/Joe")
                 .request(JsonObject.class)
                 .thenAccept(jsonObject -> Assertions.assertEquals("Hello Joe!", jsonObject.getString("message")))
@@ -84,7 +80,7 @@ public class MainTest {
                         .request(JsonObject.class))
                 .thenAccept(jsonObject -> Assertions.assertEquals("Hola Joe!", jsonObject.getString("message")))
                 .toCompletableFuture()
-                .get();
+                .get();*/
 
         webClient.get()
                 .path("/health")

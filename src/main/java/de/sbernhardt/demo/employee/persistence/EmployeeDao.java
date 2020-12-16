@@ -16,9 +16,17 @@ public class EmployeeDao {
 
   public EmployeeDao() {
 
-    final Employee employee = new Employee("GID120935", "Sven", "Bernhardt",
-        "svenbernhardt@sttc.com",
-        "Chief Architect", "male", "+(49) 2261 6001 0");
+    final Employee employee = new Employee("GID000001", "Obiwan", "Kenobi",
+        "obiwan.kenobi@rebels.com",
+        "Jedi Master", "male", "+(002123) 213 123 312 312");
+
+    new Employee("GID000002", "Luke", "Skywalker",
+        "luke.skywalker@rebels.com",
+        "Jedi Padavan", "male", "+(002123) 213 123 312 312");
+
+    new Employee("GID000003", "Han", "Solo",
+        "han.solo@rebels.com",
+        "General / Smuggler", "male", "+(002123) 213 123 312 312");
 
     employees.put(employee.getEmployeeNo(), employee);
 

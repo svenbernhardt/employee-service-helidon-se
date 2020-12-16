@@ -82,4 +82,17 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>Employee Service_repo</id>
+      <name>Employee Service Maven Repository</name>
+      <url>https://vsbst-test-svbaced.developer.ocp.oraclecloud.com/profile/vsbst-test-svbaced/s/vsbst-test-svbaced_employee-service_20243/maven/</url>
+    </repository>
+    <snapshotRepository>
+      <id>Employee Service_repo</id>
+      <name>Employee ServiceMaven Repository</name>
+      <url>https://vsbst-test-svbaced.developer.ocp.oraclecloud.com/profile/vsbst-test-svbaced/s/vsbst-test-svbaced_employee-service_20243/maven/</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
