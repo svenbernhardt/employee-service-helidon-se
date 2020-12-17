@@ -30,10 +30,11 @@ spec:
     spec:
       containers:
         - name: employee-service
-          image: fra.ocir.io/frruuyqdswys/employee-service:0.1.0
+          image: fra.ocir.io/frruuyqdswys/employee-service:0.1.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
       imagePullSecrets:
         - name: ocirsecret
 ---
+
