@@ -1,23 +1,26 @@
 color: true
+reporter: apiary
+custom:
+  apiaryApiKey: 3ef4b23acdc2eac4975fd6e5822bdd75
+  apiaryApiName: employeesapi6
 dry-run: null
 hookfiles: null
-language: java
+language: nodejs
 require: null
-server: java -jar target/employee-service-se.jar
+server: java -jar target/employee-service.jar
 server-wait: 3
 init: false
 names: false
-only: [ ]
-reporter: none
-output: [ ]
-header: [ ]
-sorted: true
+only: []
+output: []
+header: []
+sorted: false
 user: null
 inline-errors: false
 details: false
-method: [ ]
+method: []
 loglevel: warning
-path: [ ]
+path: []
 hooks-worker-timeout: 5000
 hooks-worker-connect-timeout: 1500
 hooks-worker-connect-retry: 500
