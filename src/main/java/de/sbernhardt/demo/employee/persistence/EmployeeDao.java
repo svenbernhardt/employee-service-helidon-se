@@ -12,75 +12,70 @@ import java.util.Random;
 
 public class EmployeeDao {
 
-  private Map<String, Employee> employees = new HashMap<>();
+    private Map<String, Employee> employees = new HashMap<>();
 
-  public EmployeeDao() {
+    public EmployeeDao() {
 
-    final Employee employee = new Employee("GID000001", "Obiwan", "Kenobi",
-        "obiwan.kenobi@rebels.com",
-        "Jedi Master", "male", "+(002123) 213 123 312 312");
+        final Employee obiwan = new Employee("GID000001", "Obiwan", "Kenobi", "obiwan.kenobi@rebels.com", "Jedi Master",
+                "male", "+(002123) 213 123 312 312");
 
-    new Employee("GID000002", "Luke", "Skywalker",
-        "luke.skywalker@rebels.com",
-        "Jedi Padavan", "male", "+(002123) 213 123 312 312");
+        final Employee luke = new Employee("GID000002", "Luke", "Skywalker", "luke.skywalker@rebels.com",
+                "Jedi Padavan", "male", "+(002123) 213 123 312 312");
 
-    new Employee("GID000003", "Han", "Solo",
-        "han.solo@rebels.com",
-        "General / Smuggler", "male", "+(002123) 213 123 312 312");
+        final Employee han = new Employee("GID000003", "Han", "Solo", "han.solo@rebels.com", "General / Smuggler",
+                "male", "+(002123) 213 123 312 312");
 
-    employees.put(employee.getEmployeeNo(), employee);
-
-  }
-
-  public Employee save(Employee pEmployee) {
-
-    //final String employeeNo = getUniqueEmployeeNo();
-
-    employees.put(pEmployee.getEmployeeNo(), pEmployee);
-
-    return pEmployee;
-  }
-
-  public Employee update(String pEmployeeNo, Employee pEmployee) {
-
-    if (!employees.containsKey(pEmployeeNo)) {
-      throw new IllegalArgumentException(
-          String.format("Employee with EmployeeNo [%s] not found!", pEmployeeNo));
+        employees.put(obiwan.getEmployeeNo(), obiwan);
+        employees.put(luke.getEmployeeNo(), luke);
+        employees.put(han.getEmployeeNo(), han);
     }
 
-    employees.put(pEmployeeNo, pEmployee);
+    public Employee save(Employee pEmployee) {
 
-    return pEmployee;
-  }
+        // final String employeeNo = getUniqueEmployeeNo();
 
-  public void delete(String pEmployeeNo) {
+        employees.put(pEmployee.getEmployeeNo(), pEmployee);
 
-    employees.remove(pEmployeeNo);
-  }
-
-  public List<Employee> find(String pLastName, String pEmployeeNo) {
-
-    List<Employee> employeesResult = null;
-
-    if (isNullOrEmpty(pLastName) && isNullOrEmpty(pEmployeeNo)) {
-      employeesResult = List.copyOf(employees.values());
-    } else if (isNullOrEmpty(pLastName)) {
-      employeesResult = List.of(employees.get(pEmployeeNo));
-    } else {
-      employeesResult = Collections.emptyList();
+        return pEmployee;
     }
 
-    return employeesResult;
-  }
+    public Employee update(String pEmployeeNo, Employee pEmployee) {
 
-  private String getUniqueEmployeeNo() {
-    String employeeNo = "";
+        if (!employees.containsKey(pEmployeeNo)) {
+            throw new IllegalArgumentException(String.format("Employee with EmployeeNo [%s] not found!", pEmployeeNo));
+        }
 
-    employeeNo = "GID"
-        + Strings
-        .padStart(String.valueOf(new Random().ints(1, 99999).limit(1).findFirst().getAsInt()), 5,
-            '0');
+        employees.put(pEmployeeNo, pEmployee);
 
-    return employeeNo;
-  }
+        return pEmployee;
+    }
+
+    public void delete(String pEmployeeNo) {
+
+        employees.remove(pEmployeeNo);
+    }
+
+    public List<Employee> find(String pLastName, String pEmployeeNo) {
+
+        List<Employee> employeesResult = null;
+
+        if (isNullOrEmpty(pLastName) && isNullOrEmpty(pEmployeeNo)) {
+            employeesResult = List.copyOf(employees.values());
+        } else if (isNullOrEmpty(pLastName)) {
+            employeesResult = List.of(employees.get(pEmployeeNo));
+        } else {
+            employeesResult = Collections.emptyList();
+        }
+
+        return employeesResult;
+    }
+
+    private String getUniqueEmployeeNo() {
+        String employeeNo = "";
+
+        employeeNo = "GID"
+                + Strings.padStart(String.valueOf(new Random().ints(1, 99999).limit(1).findFirst().getAsInt()), 5, '0');
+
+        return employeeNo;
+    }
 }
